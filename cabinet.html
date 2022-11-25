@@ -35,24 +35,33 @@
         </nav>
     </header>
 
-    <div class="container-xxl">
-        <section class="info-sec">
-            <div class="row first-row">
-
-                <!-- Тут можно реализовать отображение роли, если нужно -->
-                <h2 style="text-align: center">Добрый день, пользователь</h2>
+    <main>
+        <div class="container-xxl">
+            <div class="row visits-count">
+                <p class="visits-count-text">Количество посещений:</p>
+                <p id="visits-count" class="visits-count-number">5</p>
             </div>
-            <div class="row second-row">
-                <form>
-                    <div class="form-group from-group-info">
-                        <label for="exampleFormControlFile1" class="control-file-text">Загрузите свою медицинскую
-                            книжку</label>
-                        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <section class="info-sec">
+                <div class="row first-row-info">
+                    <h2 style="text-align: center">Добрый день, пользователь</h2>
+                    <div class="row time-row">
+                        <p class="time-p">текущее время:</p>
+                        <p class="current-time" id="current-time">25.11.2022 20:40</p>
                     </div>
-                </form>
-            </div>
-        </section>
-    </div>
+                </div>
+                <div class="row second-row">
+                    <form>
+                        <div class="form-group form-group-info">
+                            <label for="exampleFormControlFile1" class="control-file-text">Загрузите свою
+                                медицинскую
+                                книжку</label>
+                            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+                        </div>
+                    </form>
+
+            </section>
+        </div>
+    </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
