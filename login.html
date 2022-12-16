@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,21 +20,36 @@
                 <h3 class="login-text">Авторизация</h3>
             </div>
             <div class="row second-row">
-                <form>
+                <form id="login-form" action="/api/auth/login">
 
                     <!--Форма для ввода логина-->
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputLogin" aria-describedby="emailHelp"
-                            placeholder="Логин">
+                    <div class="mb-3" id="username">
+                        <div class="input-group has-validation">
+                            <div class="form-floating" id="usernameContainer">
+                                <input id="usernameGroup" name="username" type="text" class="form-control" required>
+                                <label for="usernameGroup">Имя пользователя</label>
+                            </div>
+                            <div class="invalid-feedback" id="usernameMessage">
+                            </div>
+                        </div>
                     </div>
 
                     <!--Форма для ввода пароля-->
-                    <div class="form-group">
-                        <input type="password" class="form-control" id="exampleInputPassword" placeholder="Пароль">
+                    <div class="mb-3" id="password">
+                        <div class="input-group has-validation">
+                            <div class="form-floating" id="passwordContainer">
+                                <input id="passwordGroup" name="password" type="password" class="form-control" required>
+                                <label for="passwordGroup">Пароль</label>
+                            </div>
+                            <div class="invalid-feedback" id="passwordMessage">
+                            </div>
+                        </div>
                     </div>
 
+                    <div id="globAlert" class="alert alert-danger d-none" role="alert"></div>
+
                     <div class="row login-buttons">
-                        <a href="./cabinet.html" class="btn btn-primary button-login">Войти</a>
+                        <button type="submit" class="btn btn-primary btn-lg" id="login-btn">Войти</button>
                         <a href="./registration.html" class="btn btn-primary button-login">Регистрация</a>
                     </div>
 
@@ -46,4 +63,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
         crossorigin="anonymous"></script>
+
+    <!-- <script type="module" src="js/login.js"></script> -->
 </body>

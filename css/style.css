@@ -222,6 +222,44 @@ section {
   padding: 10px;
   background-color: #ffffff;
   border-top: 1px solid rgba(81, 80, 80, 0.538);
+  display: flex;
+  height: 100%;
+  padding-bottom: 50px;
+}
+
+.news-card {
+  border: 2px solid gray !important;
+  /* border-radius: 0px !important; */
+  margin-bottom: 25px;
+}
+
+.news-img {
+  width: 300px;
+  height: 300px;
+  margin-right: 25px;
+}
+
+.news-text-block {
+  width: 90%;
+  height: 300px;
+  margin-right: 0px !important;
+}
+
+.news-body {
+  border: 1px solid rgba(0, 0, 0, 0.03) !important;
+  border-top: 0px solid gray !important;
+  border-bottom: 0px solid black !important;
+}
+
+.news-date {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge-light {
+  color: black !important;
+  font-size: 14px !important;
 }
 
 .main-about-us {
@@ -304,6 +342,10 @@ section {
   margin-top: 10px;
 }
 
+.form-control-file {
+  margin-bottom: 10px;
+}
+
 .button-login {
   width: 150px !important;
   margin-bottom: 10px !important;
@@ -368,6 +410,7 @@ section {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  height: 170px;
 }
 
 .control-file-text {
@@ -391,4 +434,96 @@ section {
   height: 30px;
   width: 50px !important;
   margin-left: -20px;
+}
+
+.cabinet-container {
+  min-height: 85vh;
+}
+
+.news-container {
+  width: 100% !important;
+  margin-left: 20px !important;
+}
+
+.news-row {
+  min-width: 180vh;
+}
+
+.newsheading-col {
+  width: 100%;
+}
+
+.admin-sec {
+  background-color: rgb(128, 125, 125);
+  width: 50px;
+  height: 50px;
+}
+
+.form-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 120px;
+  margin-top: 20px;
+  background-color: rgb(201, 196, 196);
+  border-radius: 0px 0px 20px 20px;
+}
+
+.admin-panel-button {
+  display: flex;
+  justify-content: center;
+}
+
+.modal-container {
+  min-width: 100%;
+  min-height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.user-card {
+  border: 2px solid gray !important;
+  margin-bottom: 20px;
+}
+
+.user-card-body {
+  display: flex;
+}
+
+.card-text-admin {
+  width: 100%;
+  font-weight: bold;
+}
+
+.login-col {
+  min-width: 250px !important;
+}
+
+.password-col {
+  min-width: 250px !important;
+}
+
+.email-col {
+  min-width: 350px !important;
+}
+
+.role-cole {
+  max-width: 130px !important;
+}
+
+.admin-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-left: 2px solid gray !important;
+}
+
+.dropdown-role-button {
+  width: 100%;
+  border-radius: 0px !important;
 }
