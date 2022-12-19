@@ -14,7 +14,7 @@ async function login(event) {
 
     let formData = new FormData(form);
     //console.log(formData);
-    let resp = await postFormAsJson(url, formData);
+    let resp = await postFormAsJson(url, formData, "");
     let status = resp.status;
     let jsonResp = await resp.json();
     console.log(jsonResp);

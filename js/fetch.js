@@ -38,19 +38,21 @@ export async function fetchJson(type, url, body, authToken = "") {
  * @param {string} url 
  * @param {FormData} formData 
  */
-export async function postFormAsJson(url, formData) {
+export async function postFormAsJson(url, formData, token) {
+    return await sendFormAsJson(url, formData, token, HttpMethod.POST);
+}
+
+export async function sendFormAsJson(url, formData, token, method = HttpMethod.POST) {
     const plainData = Object.fromEntries(formData.entries());
-    return await fetchJson(HttpMethod.POST, url, plainData);
+    return await fetchJson(method, url, plainData, token);
 }
 
 export async function postFormMultipart(url, formData, token) {
-    const plainData = Object.fromEntries(formData.entries());
     return await fetch(
         url, {
         method: HttpMethod.POST,
-        body: plainData,
+        body: formData,
         headers: {
-            "Content-Type": "multipart/form-data",
             "Authorization": token
         }
     }

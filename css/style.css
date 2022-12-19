@@ -527,3 +527,7 @@ section {
   width: 100%;
   border-radius: 0px !important;
 }
+
+.service-file {
+  height: 120px !important;
+}

@@ -44,3 +44,11 @@ export async function clearGlobalAlert(form) {
     alert.classList.add("d-none");
 }
 
+export async function clearFields(form, fields) {
+    fields.forEach((field) => {
+        let input = form.querySelector("#" + field + "Group");
+        input.value = "";
+    });
+}
+
+
