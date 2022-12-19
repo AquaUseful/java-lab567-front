@@ -12,8 +12,9 @@ userCb.onclick = function () {
     if (userCb.checked == true) {
         adminPanelButton.innerHTML = ``;
         editorPanelButton.innerHTML = ``;
-        userPanelButton.innerHTML = `<button type="button" class="btn btn-primary app-button"
-                                data-bs-toggle="modal" data-bs-target="#userModal">Записаться на приём</button>`;
+        userPanelButton.innerHTML = `<div id="user-request-button"><button type="button" class="btn btn-primary"
+        data-bs-toggle="modal" data-bs-target="#userRequestModal">Список записей на
+        приём</button></div>`;
     }
 };
 
@@ -107,33 +108,7 @@ userContainer.append(userCard);
 
 
 
-//запрет ввода в поля для редактирования юзера/новости
-const loginInputCheck = document.getElementById("login-check");
-const passwordInputCheck = document.getElementById("password-check");
-const emailInputCheck = document.getElementById("email-check");
-loginInputCheck.onclick = function () {
-    if (loginInputCheck.checked == true) {
-        document.getElementById('edit-login').readOnly = true;
-    } else {
-        document.getElementById('edit-login').readOnly = false;
-    }
-};
 
-passwordInputCheck.onclick = function () {
-    if (passwordInputCheck.checked == true) {
-        document.getElementById('edit-password').readOnly = true;
-    } else {
-        document.getElementById('edit-password').readOnly = false;
-    }
-};
-
-emailInputCheck.onclick = function () {
-    if (emailInputCheck.checked == true) {
-        document.getElementById('edit-email').readOnly = true;
-    } else {
-        document.getElementById('edit-email').readOnly = false;
-    }
-};
 
 
 
