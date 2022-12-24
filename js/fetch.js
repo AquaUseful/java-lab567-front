@@ -11,7 +11,8 @@ export const HttpResponse = {
     Created: 201,
     BadRequest: 400,
     Forbidden: 403,
-    Unauthorised: 401
+    Unauthorised: 401,
+    NoContent: 204
 }
 
 /**
@@ -47,14 +48,18 @@ export async function sendFormAsJson(url, formData, token, method = HttpMethod.P
     return await fetchJson(method, url, plainData, token);
 }
 
-export async function postFormMultipart(url, formData, token) {
+export async function sendFormMultipart(url, formData, token, method = HttpMethod.POST) {
     return await fetch(
         url, {
-        method: HttpMethod.POST,
+        method: method,
         body: formData,
         headers: {
             "Authorization": token
         }
     }
     );
+}
+
+export async function postFormMultipart(url, formData, token) {
+    return await sendFormMultipart(url, formData, token);
 }

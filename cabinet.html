@@ -41,11 +41,6 @@
             <div class="row visits-count">
                 <p class="visits-count-text">Количество посещений:</p>
                 <p id="visits-count" class="visits-count-number">0</p>
-
-                <!-- Тест скрипта на отображение кнопок для разных ролей (убери когда проверишь его работу) -->
-                <div><input type="radio" name="test" id="test-user-role"> Кабинет юзера</div>
-                <div><input type="radio" name="test" id="test-admin-role"> Админ-панель</div>
-                <div><input type="radio" name="test" id="test-editor-role"> Панель редактора</div>
             </div>
         </div>
         <section class="info-sec">
@@ -83,7 +78,7 @@
         </section>
 
         <!-- Модальное окно для пользователя (меню заявок) -->
-        <div class=" modal fade" id="userRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="userRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen">
                 <div class="modal-content">
@@ -95,36 +90,7 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        <div class="container-xxl modal-container" id="request-container">
-                            <div class="card user-card" id="request-card1">
-                                <div class="card-body user-card-body">
-                                    <!-- динамическая генерация номера -->
-                                    <h5 class="card-title">Заявка №1</h5>
-                                    <div class="container text-center">
-                                        <div class="row">
-                                            <div class="col login-col">
-                                                <p class="card-text card-text-admin">ФИО Доктора</p>
-                                                <p class="card-text card-login" id="#requestDocName1">Темирболатов
-                                                    Шамиль Расулович</p>
-                                            </div>
-                                            <div class="col password-col">
-                                                <p class="card-text card-text-admin">Услуга</p>
-                                                <p class="card-text card-password" id="#requestService1">Установка
-                                                    брекетов</p>
-                                            </div>
-                                            <div class="col role-cole">
-                                                <p class="card-text card-text-admin">Файл</p>
-                                                <a href="#">Рентген.jpg</a>
-                                            </div>
-                                            <div class="col admin-button">
-                                                <button type="button " class="btn btn-primary"
-                                                    data-bs-target="#requestEditModal" data-bs-toggle="modal"
-                                                    id="admin-button-user-edit">Редактировать</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="container-xxl modal-container" id="application-container">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -144,9 +110,8 @@
                         <!-- крестик для закрытия окна -->
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
                     </div>
-                    <div class="modal-body">
-
-                        <form id="request-form" action="/api/auth/login">
+                    <form id="applicationAddForm" action="/api/user/self/application">
+                        <div class="modal-body">
                             <!--Форма для ввода фио -->
                             <div class="mb-3" id="doctorName">
                                 <div class="row text-center">Оставьте заявку на приём, а мы вас запишем и
@@ -154,7 +119,7 @@
                                     электронной почте</div>
                                 <div class="input-group has-validation">
                                     <div class="form-floating" id="doctorNameContainer">
-                                        <input id="doctorNameGroup" name="doctorname" type="text" class="form-control"
+                                        <input id="doctorNameGroup" name="doctorName" type="text" class="form-control"
                                             required>
                                         <label for="doctorNameGroup">ФИО врача: </label>
                                     </div>
@@ -177,81 +142,28 @@
                             <!-- Загрузка файла в заявку -->
                             <div class="mb-3" id="requestFile">
                                 <div class="form-group form-group-info service-file">
-                                    <label for="request-send-file" class="col-form-label">Если требуется, загрузите
+                                    <label for="attachmentGroup" class="col-form-label">Если требуется, загрузите
                                         дополнительный файл, например, флюрографию, рентген или мед.карту</label>
-                                    <input name="file" type="file" class="form-control-file" id="request-send-file">
+                                    <input name="attachment" type="file" class="form-control-file" id="attachmentGroup">
                                 </div>
                             </div>
                             <div id="globAlert" class="alert alert-danger d-none" role="alert"></div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <!-- кнопка, закрывающая модальное окно и отправляющая данные заявки на сервер -->
-                        <div class="row login-buttons">
-                            <button type="submit" class="btn btn-primary btn-lg" data-bs-dismiss="modal"
-                                id="request-send-btn">Отправить заявку</button>
+
                         </div>
-                    </div>
+                        <div class="modal-footer">
+                            <!-- кнопка, закрывающая модальное окно и отправляющая данные заявки на сервер -->
+                            <div class="row login-buttons">
+                                <button type="submit" class="btn btn-primary btn-lg" id="request-send-btn">Отправить
+                                    заявку</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
 
-
-        <!-- Редактирование заявки -->
-        <div class="modal fade" id="requestEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Редактировать заявку</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-xxl modal-container">
-                            <form class="user-edit-form" id="requestEditForm">
-                                <div class="mb-3" id="docNameEdit">
-                                    <div class="input-group has-validation">
-                                        <div class="form-floating" id="doctorNameContainer">
-                                            <input id="doctorEditNameGroup" name="doctorname" type="text"
-                                                class="form-control" required>
-                                            <label for="doctorEditNameGroup">ФИО врача: </label>
-                                        </div>
-                                        <div class="invalid-feedback" id="doctorNameEditMessage">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3" id="serviceNameEdit">
-                                    <div class="input-group has-validation">
-                                        <div class="form-floating" id="serviceContainer">
-                                            <input id="serviceEditGroup" name="service" type="text" class="form-control"
-                                                required>
-                                            <label for="serviceEditGroup">Наименование услуги: </label>
-                                        </div>
-                                        <div class="invalid-feedback" id="serviceEditMessage">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mb-3" id="requestFile">
-                                    <div class="form-group form-group-info service-file">
-                                        <label for="request-send-file" class="col-form-label">Новый файл</label>
-                                        <input name="file" type="file" class="form-control-file" id="request-send-file">
-                                    </div>
-                                </div>
-                                <div id="globAlert" class="alert alert-danger d-none" role="alert"></div>
-
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
-                                <button type="submit" class="btn btn-danger">Удалить заявку</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-secondary" data-bs-toggle="modal" href="#userRequestModal"
-                            role="button">Вернуться к
-                            списку заявок</a>
-                    </div>
-                </div>
-            </div>
+        <div id="applicationEditModalContainer">
+            <!-- Редактирование заявки -->
         </div>
 
 
@@ -268,112 +180,6 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-xxl modal-container" id="user-container">
-                            <!-- Cписок пользователей -->
-                            <!-- При добавление юзера добавляется карточка с его данными и нужным функционалом-->
-
-                            <!-- пример карточки, номер idшника генерится автоматически -->
-                            <div class="card user-card" id="user-card1">
-                                <div class="card-body user-card-body">
-                                    <!-- динамическая генерация номера -->
-                                    <h5 class="card-title">Пользователь №1</h5>
-                                    <div class="container text-center">
-                                        <div class="row">
-                                            <div class="col login-col">
-                                                <!-- синхронизация с бд имени -->
-                                                <p class="card-text card-text-admin">Имя пользователя</p>
-                                                <p class="card-text card-login" id="#user-login1">Макамович</p>
-                                            </div>
-                                            <div class="col password-col">
-                                                <!-- синхронизация с бд пароля -->
-                                                <p class="card-text card-text-admin">Пароль</p>
-                                                <p class="card-text card-password" id="#user-password1">1488</p>
-
-                                            </div>
-                                            <div class="col email-col">
-                                                <!-- синхронизация с бд почты -->
-                                                <p class="card-text card-text-admin">Email</p>
-                                                <p class="card-text card-email" id="#user-email1">makarmovitch@yandex.ru
-                                                </p>
-                                            </div>
-                                            <div class="col role-col">
-                                                <!-- синхронизация с бд роли -->
-                                                <p class="card-text card-text-admin">Роль</p>
-                                                <p class="card-text card-role" id="#user-role1">user</p>
-                                            </div>
-                                            <div class="col admin-button">
-                                                <button type="button " class="btn btn-primary"
-                                                    data-bs-target="#adminUserEditModal" data-bs-toggle="modal"
-                                                    id="admin-button-user-edit">Редактировать</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card user-card" id="user-card2">
-                                <div class="card-body user-card-body">
-                                    <h5 class="card-title d-flex">Пользователь №2</h5>
-                                    <div class="container text-center">
-                                        <div class="row">
-                                            <div class="col login-col">
-                                                <p class="card-text card-text-admin">Имя пользователя</p>
-                                                <p class="card-text card-login" id="#user-login2">Afonin$$CASH</p>
-                                            </div>
-                                            <div class="col password-col">
-                                                <p class="card-text card-text-admin">Пароль</p>
-                                                <p class="card-text card-password" id="#user-password2">IqHBP5</p>
-
-                                            </div>
-                                            <div class="col email-col">
-                                                <p class="card-text card-text-admin">Email</p>
-                                                <p class="card-text card-email" id="#user-email2">
-                                                    nudayaedtiorachto@gmail.com
-                                                </p>
-                                            </div>
-                                            <div class="col role-cole">
-                                                <p class="card-text card-text-admin">Роль</p>
-                                                <p class="card-text card-role" id="#user-role2">editor</p>
-                                            </div>
-                                            <div class="col admin-button">
-                                                <button type="button " class="btn btn-primary"
-                                                    data-bs-target="#adminUserEditModal" data-bs-toggle="modal"
-                                                    id="admin-button-user-edit">Редактировать</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card user-card" id="user-card3">
-                                <div class="card-body user-card-body">
-                                    <h5 class="card-title">Пользователь №3</h5>
-                                    <div class="container text-center">
-                                        <div class="row">
-                                            <div class="col login-col">
-                                                <p class="card-text card-text-admin">Имя пользователя</p>
-                                                <p class="card-text card-login" id="#user-login3">Тактахыч</p>
-                                            </div>
-                                            <div class="col password-col">
-                                                <p class="card-text card-text-admin">Пароль</p>
-                                                <p class="card-text card-password" id="#user-password3">aSJkHLlx4znw</p>
-
-                                            </div>
-                                            <div class="col email-col">
-                                                <p class="card-text card-text-admin">Email</p>
-                                                <p class="card-text card-email" id="#user-email3">taaktahich@mail.da
-                                                </p>
-                                            </div>
-                                            <div class="col role-cole">
-                                                <p class="card-text card-text-admin">Роль</p>
-                                                <p class="card-text card-role" id="#user-role3">admin</p>
-                                            </div>
-                                            <div class="col admin-button">
-                                                <button type="button " class="btn btn-primary"
-                                                    data-bs-target="#adminUserEditModal" data-bs-toggle="modal"
-                                                    id="admin-button-user-edit">Редактировать</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -384,8 +190,9 @@
             </div>
         </div>
 
+
         <!-- Модальное окно для добавления юзера-->
-        <div class=" modal fade" id="adminUserAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        <div class="modal fade" id="adminUserAddModal" tabindex="-1" aria-labelledby="exampleModalLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-fullscreen">
                 <div class="modal-content">
@@ -477,131 +284,7 @@
         </div>
 
 
-
-        <!-- Модальное окно для редактирования юзера-->
-        <!-- в бутстрапе модалка связана с кнопкой с атрибутами data-bs-target="#adminUserEditModal" -->
-        <!-- где #adminUserEditModal отсылается к id модалки -->
-        <!-- так вот я не придумал как при нажатии на кнопку "Редактировать" оптимальнее -->
-        <!-- связать конкретного пользователя с конкретным модальным окном для его редактирования, где при том также будут отображаться его заявки -->
-        <!-- мб нужно генерировать модальное окно как я это делал с карточками в админ-панели, если будет идея скажи мне как будешь заниматься это частью -->
-        <div class="modal fade" id="adminUserEditModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <!-- хз тут можно отображать его name - Редактировать пользователя Тактахыч -->
-                        <h5 class="modal-title" id="exampleModalLabel">Редактировать пользователя</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-xxl modal-container">
-
-                            <form class="user-edit-form" id="admin-edit-user-form" action="/api/user">
-                                <div class="mb-3" id="usernameEdit">
-                                    <div class="input-group has-validation">
-                                        <div class="form-floating" id="usernameEditContainer">
-                                            <input id="usernameEditGroup" name="username" type="text"
-                                                class="form-control" required>
-                                            <label for="usernameEditGroup">Редактировать имя пользователя</label>
-                                        </div>
-                                        <div class="invalid-feedback" id="usernameEditMessage">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Форма для ввода email -->
-                                <div class="mb-3" id="emailEdit">
-                                    <div class="input-group has-validation">
-                                        <div class="form-floating" id="emailEditContainer">
-                                            <input id="emailEditGroup" name="email" type="email" class="form-control"
-                                                required>
-                                            <label for="emailEditGroup">Редактировать Email</label>
-                                        </div>
-                                        <div class="invalid-feedback" id="emailEditMessage">
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Форма для ввода пароля -->
-                                <div class="mb-3" id="passwordEdit">
-                                    <div class="input-group has-validation">
-                                        <div class="form-floating" id="passwordEditContainer">
-                                            <input id="passwordEditGroup" name="password" type="password"
-                                                class="form-control" required>
-                                            <label for="passwordEditGroup">Редактировать пароль</label>
-                                        </div>
-                                        <div class="invalid-feedback" id="passwordEditMessage">
-                                        </div>
-                                    </div>
-                                </div>
-                                <fieldset class="form-group">
-                                    <div class="row">
-                                        <legend class="col-form-label col-sm-2 pt-0">Роль</legend>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="role" id="roleRadio1"
-                                                    value="USER" checked>
-                                                <label class="form-check-label" for="gridRadios1">
-                                                    USER
-                                                </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="role" id="roleRadio2"
-                                                    value="EDITOR">
-                                                <label class="form-check-label" for="gridRadios2">
-                                                    EDITOR
-                                                </label>
-                                            </div>
-                                            <div class="form-check disabled">
-                                                <input class="form-check-input" type="radio" name="role" id="roleRadio3"
-                                                    value="ADMIN">
-                                                <label class="form-check-label" for="gridRadios3">
-                                                    ADMIN
-                                                </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </fieldset>
-                                <div id="globAlert" class="alert alert-danger d-none" role="alert"></div>
-                                <button type="submit" class="btn btn-primary"
-                                    id="admin-button-user-edit">Сохранить</button>
-                                <button type="submit" class="btn btn-danger" id="admin-button-user-delete">Удалить
-                                    пользователя</button>
-                            </form>
-                            <div class="container-xxl">
-                                <div>Заявки пользователя</div>
-                                <div class="card user-card user-req">
-                                    <div class="card-body user-card-body">
-                                        <div class="container text-center">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p>Фио: </p>
-                                                    <p id="doc-name2">Темирболатов Шамиль Расулович</p>
-                                                </div>
-                                                <div class="col">
-                                                    <p>Услуга</p>
-                                                    <p id="service-name2">Лечение плоскостопия</p>
-                                                </div>
-                                                <div class="col">
-                                                    <p>Файл: </p>
-                                                    <a href="#">Рентген.jpg</a>
-                                                </div>
-                                                <div class="col">
-                                                    <button type="button" class="btn btn-danger">Удалить заявку</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-secondary" data-bs-toggle="modal" href="#adminModal" role="button">Вернуться к
-                            списку пользователей</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
+        <div id="adminUserEditModalContainer"></div>
 
 
         <!-- Модальное окно для редактора -->
@@ -615,35 +298,11 @@
                             data-bs-toggle="modal">Cоздать новость</button>
                     </div>
                     <div class="modal-body">
-                        <div class="container-xxl modal-container">
+                        <div class="container-xxl modal-container" id="newsContainer">
                             <!-- Cписок новостей -->
                             <!-- При добавление новости добавляется карточка с её title и датой создания-->
                             <!-- работает также как с пользователями, комментами и заявками -->
-                            <div class="card user-card">
-                                <div class="card-body user-card-body">
-                                    <h5 class="card-title">Новость</h5>
-                                    <div class="container news-container text-center">
-                                        <div class="row news-row">
-                                            <div class="col-6 newsheading-col ">
-                                                <p class="card-text card-text-newsheading fw-bold">Заголовок</p>
-                                                <p class="card-text card-newsheading" id="#card-newsheading1">Ингибиторы
-                                                    PCSK9 – эффективность доказана
-                                                </p>
-                                            </div>
-                                            <div class="col-2 newsdate-col ">
-                                                <p class="card-text card-text-newsdate fw-bold">Дата создания</p>
-                                                <p class="card-text card-newsdate" id="#card-newsdate1">14.12.2022 14:12
-                                                </p>
-                                            </div>
-                                            <div class="col-3 admin-button">
-                                                <button type="button " class="btn btn-primary"
-                                                    data-bs-target="#editorEditNewsModal"
-                                                    data-bs-toggle="modal">Подробнее</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -665,32 +324,48 @@
                     </div>
                     <div class="modal-body">
                         <div class="container-xxl modal-container">
-                            <form class="user-edit-form">
-                                <div class="mb-3">
-                                    <div>
-                                        <label for="inputLogin" class="form-label">
-                                            Заголовок новости</label>
+                            <form class="user-edit-form" id="addNewsForm" action="api/news">
+                                <!-- Форма для ввода названия -->
+                                <div class="mb-3" id="title">
+                                    <div class="input-group has-validation">
+                                        <div class="form-floating" id="emailContainer">
+                                            <input id="titleGroup" name="title" type="text" class="form-control"
+                                                required>
+                                            <label for="titleGroup">Название новости</label>
+                                        </div>
+                                        <div class="invalid-feedback" id="titleMessage">
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" id="editLogin" aria-describedby="loginHelp">
                                 </div>
-
-                                <div class="mb-3">
-                                    <div>
-                                        <label for="inputPassword" class="form-label">
-                                            Текст новости</label>
+                                <!-- Форма для ввода содержания -->
+                                <div class="mb-3" id="content">
+                                    <div class="input-group has-validation">
+                                        <div class="form-floating" id="contentContainer">
+                                            <textarea id="contentGroup" name="content" rows="10" class="form-control"
+                                                required></textarea>
+                                            <label for="contentGroup">Содержание новости</label>
+                                        </div>
+                                        <div class="invalid-feedback" id="contentMessage">
+                                        </div>
                                     </div>
-                                    <textarea class="form-control" id="message-text"></textarea>
                                 </div>
 
-                                <div class="mb-3">
-                                    <label for="message-text" class="col-form-label">Загрузить фото к новости</label>
-                                    <input name="file" type="file" class="form-control-file" id="avatar-file">
+
+                                <div class="mb-3" id="requestAttachment">
+                                    <div class="form-group form-group-info service-file">
+                                        <label for="request-send-file" class="col-form-label">Изображение
+                                            новости</label>
+                                        <input name="picture" type="file" class="form-control-file"
+                                            id="request-send-file">
+                                    </div>
                                 </div>
 
-                                <button type="submit" class="btn btn-primary">Создать</button>
+                                <div id="globAlert" class="alert alert-danger d-none" role="alert"></div>
+
+                                <button type="submit" class="btn btn-primary"
+                                    id="admin-button-user-add">Добавить</button>
                             </form>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <a class="btn btn-secondary" data-bs-toggle="modal" href="#editorModal" role="button">Вернуться
@@ -707,123 +382,81 @@
         <!-- но в общем идея в том, чтобы при редаче новости она сразу же отображалась сверху, типо просмотр редактирования в реальном времени -->
         <!-- тут же я впихнул ебучение комментарии пользователей -->
         <!-- блять там ещё же надо лайки сделать... -->
-        <div class="modal fade" id="editorEditNewsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-fullscreen">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Редактировать новость</h5>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container-xxl modal-container">
-
-                            <!-- Секция, отвечающая за демонстрацию новости -->
-                            <!--                            <div class="container-xxl">
-                                <div class="card news-card">
-                                    <div class="card-body user-card-body news-card-body">
-                                        <img class="news-img" src="img/inhibitor.jpg">
-                                        <div class="row news-text-block">
-                                            <div class="card">
-                                                <div class="card-header news-header">
-                                                    Ингибиторы PCSK9 – эффективность доказана
-                                                </div>
-                                                <div class="card-body news-body">
-                                                    <p class="card-text">Опытом применения этой группы препаратов в
-                                                        клинической
-                                                        практике поделился председатель Ученого Совета ГК МЕДСИ, научный
-                                                        руководитель Клинико-диагностического центра МЕДСИ на
-                                                        Белорусской,
-                                                        руководитель Центра диагностики и инновационных медицинских
-                                                        технологий КДЦБ,
-                                                        доктор медицинских наук, профессор Геннадий Александрович
-                                                        Коновалов в ходе
-                                                        обучающего мероприятия Национального общества по изучению
-                                                        атеросклероза
-                                                        «Липидный форум», которое прошло в Москве 12 декабря.</p>
-                                                </div>
-                                                <div class="card-footer text-muted news-date">
-                                                    14/12/2022
-                                                </div>
+        <div id="newsEditModalContainer">
+            <div class="modal fade" id="editorEditNewsModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-fullscreen">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Редактировать новость</h5>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-xxl modal-container">
+                                <form class="user-edit-form" id="addNewsForm" action="api/news">
+                                    <!-- Форма для ввода названия -->
+                                    <div class="mb-3" id="title">
+                                        <div class="input-group has-validation">
+                                            <div class="form-floating" id="emailContainer">
+                                                <input id="titleGroup" name="title" type="text" class="form-control"
+                                                    required>
+                                                <label for="titleGroup">Название новости</label>
+                                            </div>
+                                            <div class="invalid-feedback" id="titleMessage">
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                    <!-- Форма для ввода содержания -->
+                                    <div class="mb-3" id="content">
+                                        <div class="input-group has-validation">
+                                            <div class="form-floating" id="contentContainer">
+                                                <textarea id="contentGroup" name="content" rows="10"
+                                                    class="form-control" required></textarea>
+                                                <label for="contentGroup">Содержание новости</label>
+                                            </div>
+                                            <div class="invalid-feedback" id="contentMessage">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="mb-3" id="requestAttachment">
+                                        <div class="form-group form-group-info service-file">
+                                            <label for="request-send-file" class="col-form-label">Изображение
+                                                новости</label>
+                                            <input name="picture" type="file" class="form-control-file"
+                                                id="request-send-file">
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3 form-check">
+                                        <input type="checkbox" class="form-check-input" name="deleteAttachment"
+                                            id="deleteAttachmentCheck">
+                                        <label class="form-check-label" for="exampleCheck1"
+                                            for="deleteAttachmentCheck">Удалить изображение</label>
+                                    </div>
+
+                                    <div class="mb-3" id="requestAttachment">
+                                        <div class="form-group form-group-info service-file">
+                                            <label for="request-send-file" class="col-form-label">Новое изображение файл
+                                                (заменяет старое, если не выбрана опция удалить изображение)</label>
+                                            <input name="attachment" type="file" class="form-control-file"
+                                                id="request-send-file">
+                                        </div>
+                                    </div>
+
+                                    <div id="globAlert" class="alert alert-danger d-none" role="alert"></div>
+
+                                    <button type="submit" class="btn btn-primary"
+                                        id="admin-button-user-add">Сохранить</button>
+                                </form>
                             </div>
-                        -->
-                            <!-- Секция, отвечающая за редактирование новости -->
-                            <form class="user-edit-form">
-                                <div class="mb-3">
-                                    <div><input type="checkbox" class="form-check-input ms-15" id="login-check">
-                                        <label for="inputLogin" class="form-label">
-                                            Редактировать заголовок</label>
-                                    </div>
-                                    <input type="text" class="form-control" id="editLogin" aria-describedby="loginHelp">
-                                </div>
-
-                                <div class="mb-3">
-                                    <div><input type="checkbox" class="form-check-input ms-15" id="password-check">
-                                        <label for="inputPassword" class="form-label">
-                                            Редактировать текст новости</label>
-                                    </div>
-                                    <textarea class="form-control" id="message-text"></textarea>
-                                </div>
-
-                                <button type="submit" class="btn btn-primary">Сохранить</button>
-                                <button type="submit" class="btn btn-danger">Удалить новость</button>
-                            </form>
-
-                            <!-- Секция, отвечающая за отображение комментариев к каждой новости -->
-                            <div class="container-xxl">
-                                <div>Комментарии пользователей</div>
-                                <div class="card user-card user-req">
-                                    <div class="card-body user-card-body">
-                                        <div class="container text-center">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p>Имя пользователя: </p>
-                                                    <p id="doc-name1">Somebody312</p>
-                                                </div>
-                                                <div class="col">
-                                                    <p>Комментарии</p>
-                                                    <p id="service-name1">Чётко!</p>
-                                                </div>
-                                                <div class="col">
-                                                    <button type="button" class="btn btn-danger">Удалить
-                                                        комментарий</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="card user-card user-req">
-                                    <div class="card-body user-card-body">
-                                        <div class="container text-center">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <p>Имя пользователя: </p>
-                                                    <p id="doc-name1">НадежДА Михайловна</p>
-                                                </div>
-                                                <div class="col">
-                                                    <p>Комментарии</p>
-                                                    <p id="service-name1">Ура ура, поздравляю :) </p>
-                                                </div>
-                                                <div class="col">
-                                                    <button type="button" class="btn btn-danger">Удалить
-                                                        комментарий</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="modal-footer">
+                                <a class="btn btn-secondary" data-bs-toggle="modal" href="#editorModal"
+                                    role="button">Вернуться
+                                    к
+                                    списку новостей</a>
                             </div>
                         </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-secondary" data-bs-toggle="modal" href="#editorModal" role="button">Вернуться
-                            к
-                            списку новостей</a>
                     </div>
                 </div>
             </div>

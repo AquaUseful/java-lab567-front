@@ -5,94 +5,30 @@ const editorCb = document.getElementById("test-editor-role");
 
 const adminPanelButton = document.getElementById("admin-panel-button");
 const editorPanelButton = document.getElementById("editor-panel-button");
-const userPanelButton = document.getElementById("user-panel-button");
+const userPanelButton = document.getElementById("user-request-button");
 
-//авторизовался микрочел без прав
-userCb.onclick = function () {
-    if (userCb.checked == true) {
-        adminPanelButton.innerHTML = ``;
-        editorPanelButton.innerHTML = ``;
-        userPanelButton.innerHTML = `<div id="user-request-button"><button type="button" class="btn btn-primary"
-        data-bs-toggle="modal" data-bs-target="#userRequestModal">Список записей на
-        приём</button></div>`;
-    }
-};
+export async function displayUserButtons() {
+    adminPanelButton.innerHTML = ``;
+    editorPanelButton.innerHTML = ``;
+    userPanelButton.innerHTML = `<button type="button" class="btn btn-primary"
+    data-bs-toggle="modal" data-bs-target="#userRequestModal">Список записей на
+    приём</button>`;
+}
 
-//авторизовался микрочел с правами админа
-adminCb.onclick = function () {
-    if (adminCb.checked == true) {
-        adminPanelButton.innerHTML = `<button type="button" class="btn btn-danger admin-button"
+export async function displayAdminButtons() {
+    adminPanelButton.innerHTML = `<button type="button" class="btn btn-danger admin-button"
         data-bs-toggle="modal" data-bs-target="#adminModal">Панель админа</button>`;
-        editorPanelButton.innerHTML = ``;
-        userPanelButton.innerHTML = ``;
-    }
-};
+    editorPanelButton.innerHTML = ``;
+    userPanelButton.innerHTML = ``;
+}
 
-//авторизовался микрочел с правами едитора
-editorCb.onclick = function () {
-    if (editorCb.checked == true) {
-        adminPanelButton.innerHTML = ``;
-        editorPanelButton.innerHTML = `<button type="button" class="btn btn-success editor-button"
-        data-bs-toggle="modal" data-bs-target="#editorModal">Панель редактора</button>`;
-        userPanelButton.innerHTML = ``;
-    }
-};
+export async function displayEditorButtons() {
+    adminPanelButton.innerHTML = ``;
+    editorPanelButton.innerHTML = `<button type="button" class="btn btn-success editor-button"
+    data-bs-toggle="modal" data-bs-target="#editorModal">Панель редактора</button>`;
+    userPanelButton.innerHTML = ``;
+}
 
-
-
-
-
-
-
-
-//визуализация добавления карточки юзера в панель админа
-//предположим челик регается либо же его создает админ в разделе "Добавить пользователя"
-//соответственно данные попадают в бд
-
-//мы взяли некоторые данные из бд
-let userId = 4; //4 поскольку я уже добавил троих челиков как пример
-
-//типа данные из бд
-let name_ = "Какой-то мужик";
-let password_ = "sdhASDVasdgbasd123";
-let email_ = "aasdasdh@yad.ru";
-let role_ = "admin";
-
-const userContainer = document.getElementById("user-container");
-const userCard = document.createElement("div");
-userCard.className = "card user-card";
-userCard.id = `user-card${userId}`
-userCard.innerHTML =
-    `<div class="card-body user-card-body">
-<h5 class="card-title">Пользователь №${userId}</h5>
-<div class="container text-center">
-    <div class="row">
-        <div class="col login-col">
-            <p class="card-text card-text-admin">Имя пользователя</p>
-            <p class="card-text card-login" id="#user-login${userId}">${name_}</p>
-        </div>
-        <div class="col password-col">
-            <p class="card-text card-text-admin">Пароль</p>
-            <p class="card-text card-password" id="#user-password${userId}">${password_}</p>
-
-        </div>
-        <div class="col email-col">
-            <p class="card-text card-text-admin">Email</p>
-            <p class="card-text card-email" id="#user-email${userId}">${email_}</p>
-        </div>
-        <div class="col role-cole">
-            <p class="card-text card-text-admin">Роль</p>
-            <p class="card-text card-role" id="#user-role${userId}">${role_}</p>
-        </div>
-        <div class="col admin-button">
-            <button type="button " class="btn btn-primary"
-                data-bs-target="#adminUserEditModal1" data-bs-toggle="modal"
-                id="admin-button-user-edit${userId}">Редактировать</button>
-        </div>
-    </div>
-</div>`
-
-userContainer.append(userCard);
 //типа появился 4 юзер
 
 //таким же способом можно удалить карточку юзера из списка в панели
